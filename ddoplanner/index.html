@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>DDO Planner</title>
+	</head>
+	
+	<body>
+		<script>
+			( function () {
+				var httpRequest = new XMLHttpRequest();
+
+				httpRequest.onreadystatechange = () => {
+					if ( httpRequest.readyState === XMLHttpRequest.DONE ) {
+						console.log( httpRequest.status );
+					}
+				}
+
+				httpRequest.open( 'HEAD', 'manifest.json', true );
+				httpRequest.send();
+			}() );
+		</script>
+	</body>
+</html>
