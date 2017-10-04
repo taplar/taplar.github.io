@@ -4,10 +4,84 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>DDO Planner</title>
+
+		<style>
+			#applicationLoader {
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				min-width: 320px;
+				width: 100vw;
+				overflow-x: hidden;
+				min-height: 100vh;
+				background-color: rgb(16, 16, 16);
+				text-align: center;
+			}
+
+			#loadingAnimation {
+				width: 150px;
+				height: 150px;
+			}
+
+			#loadingAnimation circle { animation: pulsate-circle 4s infinite; }
+
+			#loadingAnimation circle:nth-of-type(1)  { animation-delay: 0.25s; }
+			#loadingAnimation circle:nth-of-type(2)  { animation-delay: 0.5s; }
+			#loadingAnimation circle:nth-of-type(3)  { animation-delay: 0.75s; }
+			#loadingAnimation circle:nth-of-type(4)  { animation-delay: 1s; }
+			#loadingAnimation circle:nth-of-type(5)  { animation-delay: 1.25s; }
+			#loadingAnimation circle:nth-of-type(6)  { animation-delay: 1.5s; }
+			#loadingAnimation circle:nth-of-type(7)  { animation-delay: 1.75s; }
+			#loadingAnimation circle:nth-of-type(8)  { animation-delay: 2s; }
+			#loadingAnimation circle:nth-of-type(9)  { animation-delay: 2.25s; }
+			#loadingAnimation circle:nth-of-type(10) { animation-delay: 2.5s; }
+			#loadingAnimation circle:nth-of-type(11) { animation-delay: 2.75s; }
+			#loadingAnimation circle:nth-of-type(12) { animation-delay: 3s; }
+			#loadingAnimation circle:nth-of-type(13) { animation-delay: 3.25s; }
+			#loadingAnimation circle:nth-of-type(14) { animation-delay: 3.5s; }
+			#loadingAnimation circle:nth-of-type(15) { animation-delay: 3.75s; }
+			#loadingAnimation circle:nth-of-type(16) { animation-delay: 4s; }
+
+
+			#loadingAnimation circle, #loadingAnimation text { fill: rgb(244, 244, 244); }
+
+			@keyframes pulsate-circle {
+				from { r: 6 }
+				5% { r: 9 }
+				10% { r: 6 }
+			}
+		</style>
 	</head>
 	
 	<body>
-		<script>
+		<span id="applicationLoader">
+			<svg viewBox="0 0 118 118" id="loadingAnimation">
+				<g transform="translate(3,-937.36216)">
+					<circle cx="996.36218" cy="-6" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="977.36255" cy="-10.55" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="961.36218" cy="-21" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="950.96252" cy="-37.3" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="946.36218" cy="-56" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="950.96216" cy="-75.25" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="961.36218" cy="-91" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="977.36218" cy="-101.6" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="996.36218" cy="-106" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1015.3622" cy="-101.6" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1031.3622" cy="-91" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1041.6122" cy="-75.25" r="6" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1046.3622" cy="-56" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1041.6122" cy="-37.3" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1031.3622" cy="-21" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
+					<circle cx="1015.3622" cy="-10.55" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
+					<text x="20.25" y="1002" style="font-family:sans-serif;font-size:16px;">
+						<tspan x="20.25" y="1002">LOADING</tspan>
+					</text>
+				</g>
+			</svg>
+		</span>
+
+		<script type="text/template">
 			( function () {
 				var httpRequest = new XMLHttpRequest();
 
