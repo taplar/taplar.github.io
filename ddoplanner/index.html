@@ -28,6 +28,25 @@
 				margin-top: 16px;
 			}
 
+			#loadingAnimation circle { animation: pulsate-circle 4s infinite; }
+
+			#loadingAnimation circle:nth-of-type(1)  { animation-delay: 0.25s; }
+			#loadingAnimation circle:nth-of-type(2)  { animation-delay: 0.5s; }
+			#loadingAnimation circle:nth-of-type(3)  { animation-delay: 0.75s; }
+			#loadingAnimation circle:nth-of-type(4)  { animation-delay: 1s; }
+			#loadingAnimation circle:nth-of-type(5)  { animation-delay: 1.25s; }
+			#loadingAnimation circle:nth-of-type(6)  { animation-delay: 1.5s; }
+			#loadingAnimation circle:nth-of-type(7)  { animation-delay: 1.75s; }
+			#loadingAnimation circle:nth-of-type(8)  { animation-delay: 2s; }
+			#loadingAnimation circle:nth-of-type(9)  { animation-delay: 2.25s; }
+			#loadingAnimation circle:nth-of-type(10) { animation-delay: 2.5s; }
+			#loadingAnimation circle:nth-of-type(11) { animation-delay: 2.75s; }
+			#loadingAnimation circle:nth-of-type(12) { animation-delay: 3s; }
+			#loadingAnimation circle:nth-of-type(13) { animation-delay: 3.25s; }
+			#loadingAnimation circle:nth-of-type(14) { animation-delay: 3.5s; }
+			#loadingAnimation circle:nth-of-type(15) { animation-delay: 3.75s; }
+			#loadingAnimation circle:nth-of-type(16) { animation-delay: 4s; }
+
 			#loadingAnimation circle, #loadingAnimation path { fill: rgb(244, 244, 244); }
 
 			#loadingChecklist {
@@ -38,6 +57,11 @@
 			#loadingChecklist li.error { color: rgb(164, 0, 0); }
 			#loadingChecklist li.success { color: rgb(0, 164, 0); }
 			#loadingChecklist li.pending { opacity: 0.2; }
+
+			@keyframes pulsate-circle {
+				from, 10% { opacity: 1; }
+				5% { opacity: 0; }
+			}
 		</style>
 	</head>
 	
@@ -81,53 +105,6 @@
 		<script>
 			( function () {
 				'use strict';
-
-				var $$ = {
-					forEach: function ( array, callback ) {
-						var i = -1;
-
-						while ( ++i < array.length ) {
-							callback( array[ i ], i, array )
-						}
-					}
-				};
-
-				var methods = {
-					startLoadingSpinner: function () {
-						var circles = document.getElementById( 'applicationLoader' ).getElementsByTagName( 'circle' );
-
-						$$.forEach( circles, function ( circle, index, circles ) {
-							if ( methods.startLoadingSpinner ) {
-								setTimeout( function () {
-									circle.setAttribute( 'r', 9 );
-
-									setTimeout( function () {
-										circle.setAttribute( 'r', 6 );
-									}, 300 );
-								}, 300 * index );
-							}
-						} );
-
-						if ( methods.startLoadingSpinner ) {
-							setTimeout( methods.startLoadingSpinner, 300 * circles.length );
-						}
-					}
-				};
-
-				methods.startLoadingSpinner();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 				/*
 				var httpRequest = new XMLHttpRequest();
