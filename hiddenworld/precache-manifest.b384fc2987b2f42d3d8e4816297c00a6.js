@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "monsters.json"
   },
   {
-    "revision": "ee54a067b92d09d090c9",
+    "revision": "b3a9d36fafc1f64fc0b9",
     "url": "main.js"
   },
   {
