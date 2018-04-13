@@ -15,38 +15,10 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 workbox.routing.registerRoute(/^http:\/\/stackpath.bootstrapcdn.com\/font-awesome\/4.7.0\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 
 var Hiddenworld = ( function () {
+	let dataStore = {};
+
 	let functions = {
-		findAll ( objectStoreName ) {
-			return new Promise( ( resolve, reject ) => {
-				let connection = indexedDB.open( 'hiddenworld', 1 );
-				
-				connection.onsuccess = () => {
-					let database = connection.result;
-					let transaction = database.transaction( objectStoreName, 'readonly' );
-					let objectStore = transaction.objectStore( objectStoreName );
-					let request = objectStore.openCursor();
-					let results = [];
-
-					request.onsuccess = event => {
-						let cursor = event.target.result;
-
-						if ( cursor ) {
-							results.push( cursor.value );
-							cursor.continue();
-						} else {
-							database.close();
-							resolve( results );
-						}
-					};
-
-					request.onerror = () => {
-						database.close();
-						reject( results );
-					};
-				};
-			} );
-		}
-		, findByAttributeId ( resolve, reject, attributeId ) {
+		findAccessoriesByAttributeId ( resolve, reject, attributeId ) {
 			let attributes = {
 				'1': 'Abs'
 				, '2': 'Chr'
@@ -62,114 +34,67 @@ var Hiddenworld = ( function () {
 				, '12': 'Wis'
 			};
 			let attribute = attributes[ attributeId ];
-			let objectStore = 'accessories';
 
 			if ( attribute ) {
-				functions.findAll( objectStore ).then( results => {
-					resolve( new Response( JSON.stringify( { [ objectStore ]: results.filter( result => result.effect.indexOf( attribute ) > -1 ) } ) ) );
-				} );
+				resolve( new Response( JSON.stringify( { accessories: dataStore.accessories.filter( result => result.effect.indexOf( attribute ) > -1 ) } ) ) );
 			} else {
 				reject( new Response( '{}', { status: 400 } ) );
 			}
 		}
-		, findByCategoryId ( resolve, reject, categoryId ) {
-			let objectStores = {
+		, findByCollectionId ( resolve, reject, collectionId ) {
+			let collectionsById = {
 				'1': 'weapons'
 				, '2': 'armours'
 				, '3': 'accessories'
 				, '4': 'potions'
 				, '5': 'donations'
 			};
-			let objectStore = objectStores[ categoryId ];
+			let collectionName = collectionsById[ collectionId ];
 
-			if ( objectStore ) {
-				functions.findAll( objectStore ).then( results => {
-					resolve( new Response( JSON.stringify( { [ objectStore ]: results } ) ) );
-				} );
+			if ( collectionName ) {
+				resolve( new Response( JSON.stringify( { [ collectionName ]: dataStore[ collectionName ] } ) ) );
 			} else {
 				reject( new Response( '{}', { status: 400 } ) );
 			}
 		}
 		, findByTownId ( resolve, reject, townId ) {
-			let objectStore = 'monsters';
-
-			functions.findAll( objectStore ).then( results => {
-				resolve( new Response( JSON.stringify( { [ objectStore ]: results.filter( result => result.place == townId ) } ) ) );
-			} );
+			resolve( new Response( JSON.stringify( { monsters: dataStore.monsters.filter( result => result.place == townId ) } ) ) );
 		}
 		, findByLevel ( resolve, reject, level ) {
 			try {
 				level = parseInt( level, 10 );
 				let response = {};
 
-				Promise.all( [
-					functions.findAll( 'accessories' )
-					, functions.findAll( 'armours' )
-					, functions.findAll( 'donations' )
-					, functions.findAll( 'monsters' )
-					, functions.findAll( 'potions' )
-					, functions.findAll( 'weapons' )
-				] ).then( ( results ) => {
-					let i = 0;
-					response.accessories = results[i++].filter( result => ( result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
-					response.armours = results[i++].filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
-					response.donations = results[i++].filter( donation => donation.level === level);
-					response.monsters = results[i++].filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
-					response.potions = results[i++].filter( result => ( result.levelmin <= level && level <= result.levelmax ) ).sort( ( a, b ) => b.levelmin - a.levelmin || b.levelmax - a.levelmax || a.name.localeCompare( b.name ) );
-					response.weapons = results[i++].filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level || a.name.localeCompare( b.name ) );
+				response.accessories = dataStore.accessories.filter( result => ( result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
+				response.armours     = dataStore.armours.filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
+				response.donations   = dataStore.donations.filter( donation => donation.level === level);
+				response.monsters    = dataStore.monsters.filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level );
+				response.potions     = dataStore.potions.filter( result => ( result.levelmin <= level && level <= result.levelmax ) ).sort( ( a, b ) => b.levelmin - a.levelmin || b.levelmax - a.levelmax || a.name.localeCompare( b.name ) );
+				response.weapons     = dataStore.weapons.filter( result => ( result.level >= level - 3 && result.level <= level ) ).sort( ( a, b ) => b.level - a.level || a.name.localeCompare( b.name ) );
 
-					resolve( new Response( JSON.stringify( response ) ) );
-				} );
+				resolve( new Response( JSON.stringify( response ) ) );
 			} catch ( e ) {
 				reject( new Response( '{}', { status: 400 } ) );
 			}
 		}
 		, findByWeaponTypeId ( resolve, reject, weaponTypeId ) {
-			let objectStore = 'weapons';
-
-			functions.findAll( objectStore ).then( results => {
-				resolve( new Response( JSON.stringify( { [ objectStore ]: results.filter( result => result.type == weaponTypeId ) } ) ) );
-			} );
+			resolve( new Response( JSON.stringify( { weapons: dataStore.weapons.filter( result => result.type == weaponTypeId ) } ) ) );
 		}
-		, loadJsonFile ( database, objectStoreName ) {
-			return fetch( `${objectStoreName}.json` )
+		, loadJsonFile ( objectStoreName ) {
+			fetch( `${objectStoreName}.json` )
 				.then( response => response.json() )
-				.then( results => {
-					let transaction = database.transaction( objectStoreName, 'readwrite' );
-					let objectStore = transaction.objectStore( objectStoreName );
-
-					results.forEach( result => objectStore.add( result ) );
-				} );
+				.then( results => dataStore[ objectStoreName ] = results );
 		}
 	};
 
 	let api = {
 		initialize () {
-			let connection = indexedDB.open( 'hiddenworld', 1 );
-
-			connection.onupgradeneeded = () => {
-				let database = connection.result;
-
-				database.createObjectStore( 'armours', { keyPath: 'id' } )
-				database.createObjectStore( 'donations', { keyPath: 'id' } );
-				database.createObjectStore( 'accessories', { keyPath: 'id' } );
-				database.createObjectStore( 'monsters', { keyPath: 'id' } );
-				database.createObjectStore( 'potions', { keyPath: 'id' } );
-				database.createObjectStore( 'weapons', { keyPath: 'id' } );
-			};
-
-			connection.onsuccess = () => {
-				let database = connection.result;
-
-				Promise.all( [
-					functions.loadJsonFile( database, 'armours' ),
-					functions.loadJsonFile( database, 'donations' ),
-					functions.loadJsonFile( database, 'accessories' ),
-					functions.loadJsonFile( database, 'monsters' ),
-					functions.loadJsonFile( database, 'potions' ),
-					functions.loadJsonFile( database, 'weapons' )
-				] ).then( () => database.close() );
-			};
+			functions.loadJsonFile( 'armours' );
+			functions.loadJsonFile( 'donations' );
+			functions.loadJsonFile( 'accessories' );
+			functions.loadJsonFile( 'monsters' );
+			functions.loadJsonFile( 'potions' );
+			functions.loadJsonFile( 'weapons' );
 		},
 		processRequest ( { url, event, params } ) {
 			return new Promise( ( resolve, reject ) => {
@@ -177,10 +102,10 @@ var Hiddenworld = ( function () {
 
 				switch ( type ) {
 					case 'categories':
-						functions.findByCategoryId( resolve, reject, id );
+						functions.findByCollectionId( resolve, reject, id );
 						break;
 					case 'attributes':
-						functions.findByAttributeId( resolve, reject, id );
+						functions.findAccessoriesByAttributeId( resolve, reject, id );
 						break;
 					case 'types':
 						functions.findByWeaponTypeId( resolve, reject, id );
