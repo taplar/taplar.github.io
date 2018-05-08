@@ -1,124 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>DDO Planner</title>
+		<meta charset="utf-8">
+		<meta content="ie=edge" http-equiv="x-ua-compatible">
+		<meta content="width=device-width, initial-scale=1" name="viewport">
+		<link rel="manifest" href="manifest.json">
 
-		<style>
-			#applicationLoader {
-				display: inline-block;
-				position: absolute;
-				top: 0;
-				left: 0;
-				min-width: 320px;
-				width: 100vw;
-				overflow-x: hidden;
-				min-height: 100vh;
-				background-color: rgb(16, 16, 16);
-				color: rgb(244, 244, 244);
-				font-family: "Courier New", Courier, monospace;
-				font-size: 16px;
-				text-align: center;
-			}
-
-			#loadingAnimation {
-				width: 150px;
-				height: 150px;
-				margin-top: 16px;
-			}
-
-			#loadingAnimation circle { animation: pulsate-circle 4s infinite; }
-
-			#loadingAnimation circle:nth-of-type(1)  { animation-delay: 0.25s; }
-			#loadingAnimation circle:nth-of-type(2)  { animation-delay: 0.5s; }
-			#loadingAnimation circle:nth-of-type(3)  { animation-delay: 0.75s; }
-			#loadingAnimation circle:nth-of-type(4)  { animation-delay: 1s; }
-			#loadingAnimation circle:nth-of-type(5)  { animation-delay: 1.25s; }
-			#loadingAnimation circle:nth-of-type(6)  { animation-delay: 1.5s; }
-			#loadingAnimation circle:nth-of-type(7)  { animation-delay: 1.75s; }
-			#loadingAnimation circle:nth-of-type(8)  { animation-delay: 2s; }
-			#loadingAnimation circle:nth-of-type(9)  { animation-delay: 2.25s; }
-			#loadingAnimation circle:nth-of-type(10) { animation-delay: 2.5s; }
-			#loadingAnimation circle:nth-of-type(11) { animation-delay: 2.75s; }
-			#loadingAnimation circle:nth-of-type(12) { animation-delay: 3s; }
-			#loadingAnimation circle:nth-of-type(13) { animation-delay: 3.25s; }
-			#loadingAnimation circle:nth-of-type(14) { animation-delay: 3.5s; }
-			#loadingAnimation circle:nth-of-type(15) { animation-delay: 3.75s; }
-			#loadingAnimation circle:nth-of-type(16) { animation-delay: 4s; }
-
-			#loadingAnimation circle, #loadingAnimation path { fill: rgb(244, 244, 244); }
-
-			#loadingChecklist {
-				list-style-type: none;
-				padding-left: 0;
-			}
-
-			#loadingChecklist li.error { color: rgb(164, 0, 0); }
-			#loadingChecklist li.success { color: rgb(0, 164, 0); }
-			#loadingChecklist li.pending { opacity: 0.2; }
-
-			@keyframes pulsate-circle {
-				from, 10% { opacity: 1; }
-				5% { opacity: 0; }
-			}
-		</style>
+		<title>Taplar - DDO Planner</title>
 	</head>
-	
 	<body>
-		<span id="applicationLoader">
-			<svg viewBox="0 0 118 118" id="loadingAnimation" class="active">
-				<g transform="translate(0,-934.36216)">
-					<circle cx="993.45013" cy="-9" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="974.45258" cy="-12.863981" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="958.38818" cy="-23.708" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="947.69214" cy="-39.891628" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="944.05359" cy="-58.921841" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="947.85608" cy="-77.931976" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="958.71313" cy="-94.008003" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="974.88074" cy="-104.78201" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="993.9798"  cy="-108.34049" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1012.9031" cy="-104.498" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1028.9672" cy="-93.653" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1039.6891" cy="-77.576874" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1043.3622" cy="-58.42123" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1039.4758" cy="-39.44595" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1028.6577" cy="-23.33" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<circle cx="1012.5233" cy="-12.571745" r="5.4773326" transform="matrix(0,1,-1,0,0,0)" />
-					<g>
-						<path d="m 26.282114,988.21472 1.479492,0 0,9.68994 5.324707,0 0,1.24512 -6.804199,0 0,-10.93506 z" />
-						<path d="m 38.702856,989.21814 q -1.611328,0 -2.563476,1.20117 -0.944825,1.20117 -0.944825,3.27393 0,2.06543 0.944825,3.2666 0.952148,1.20117 2.563476,1.20117 1.611328,0 2.548828,-1.20117 0.944824,-1.20117 0.944824,-3.2666 0,-2.07276 -0.944824,-3.27393 -0.9375,-1.20117 -2.548828,-1.20117 z m 0,-1.20117 q 2.299805,0 3.676758,1.54541 1.376953,1.53808 1.376953,4.13086 0,2.58545 -1.376953,4.13086 -1.376953,1.53808 -3.676758,1.53808 -2.307129,0 -3.691406,-1.53808 -1.376953,-1.53809 -1.376953,-4.13086 0,-2.59278 1.376953,-4.13086 1.384277,-1.54541 3.691406,-1.54541 z" />
-						<path d="m 49.622133,989.67224 -2.006836,5.4419 4.020996,0 -2.01416,-5.4419 z m -0.834961,-1.45752 1.677246,0 4.167481,10.93506 -1.538086,0 -0.996094,-2.80518 -4.929199,0 -0.996094,2.80518 -1.560058,0 4.174804,-10.93506 z" />
-						<path d="m 57.860746,989.43054 0,8.50342 1.78711,0 q 2.263183,0 3.310547,-1.02539 1.054687,-1.02539 1.054687,-3.23731 0,-2.19726 -1.054687,-3.21533 -1.047364,-1.02539 -3.310547,-1.02539 l -1.78711,0 z m -1.479492,-1.21582 3.039551,0 q 3.178711,0 4.665527,1.32569 1.486817,1.31835 1.486817,4.13085 0,2.82715 -1.494141,4.15284 -1.494141,1.32568 -4.658203,1.32568 l -3.039551,0 0,-10.93506 z" />
-						<path d="m 68.084223,988.21472 1.479492,0 0,10.93506 -1.479492,0 0,-10.93506 z" />
-						<path d="m 72.668051,988.21472 1.992187,0 4.848633,9.14795 0,-9.14795 1.435547,0 0,10.93506 -1.992188,0 -4.848632,-9.14795 0,9.14795 -1.435547,0 0,-10.93506 z" />
-						<path d="m 91.504808,997.58972 0,-2.93701 -2.416992,0 0,-1.21582 3.881836,0 0,4.69482 q -0.856933,0.60791 -1.889648,0.92286 -1.032715,0.30761 -2.20459,0.30761 -2.563477,0 -4.013672,-1.49414 -1.442871,-1.50146 -1.442871,-4.1748 0,-2.68067 1.442871,-4.17481 1.450195,-1.50146 4.013672,-1.50146 1.069336,0 2.028808,0.26367 0.966797,0.26367 1.779786,0.77637 l 0,1.5747 q -0.820313,-0.6958 -1.743164,-1.04736 -0.922852,-0.35156 -1.940918,-0.35156 -2.006836,0 -3.017579,1.1206 -1.003417,1.12061 -1.003417,3.33985 0,2.21191 1.003417,3.33252 1.010743,1.1206 3.017579,1.1206 0.783691,0 1.398925,-0.13183 0.615235,-0.13916 1.105957,-0.42481 z" />
-					</g>
-				</g>
-			</svg>
-
-			<ul id="loadingChecklist">
-				<li>Checking Network Connection</li>
-			</ul>
-		</span>
-
-		<script>
-			( function () {
-				'use strict';
-
-				/*
-				var httpRequest = new XMLHttpRequest();
-
-				httpRequest.onreadystatechange = () => {
-					if ( httpRequest.readyState === XMLHttpRequest.DONE ) {
-						console.log( httpRequest.status );
-					}
-				}
-
-				httpRequest.open( 'HEAD', 'manifest.json', true );
-				httpRequest.send();
-				*/
-			}() );
-		</script>
-	</body>
+		<div id="application"></div>
+		<script src="main.js" type="text/javascript"></script>
+	<script type="text/javascript" src="main.js"></script></body>
 </html>
