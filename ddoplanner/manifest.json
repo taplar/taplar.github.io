@@ -3,6 +3,6 @@
 	"display": "standalone",
 	"name": "DDO Planner",
 	"short_name": "DDO Planner",
-	"start_url": "https://taplar.github.io/ddoplanner",
+	"start_url": "https://taplar.github.io/ddoplanner/index.html",
 	"theme_color": "#282828"
 }
