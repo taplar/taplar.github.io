@@ -1,7 +1,8 @@
 {
+	"background_color": "#111111",
+	"display": "standalone",
 	"name": "DDO Planner",
 	"short_name": "DDO Planner",
-	"display": "standalone",
-	"background_color": "#111111",
+	"start_url": "https://taplar.github.io/ddoplanner",
 	"theme_color": "#282828"
 }
