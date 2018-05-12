@@ -16,15 +16,27 @@
 			}
 
 			noscript {
+				color: rgb(224, 0, 0);
+			}
+
+			.firstRender {
 				color: rgb(224, 224, 224);
+				font-size: 24px;
+				text-align: center;
 			}
 		</style>
 	</head>
 	<body>
-		<div id="application"></div>
-		<noscript>
-			Javascript must be enabled to use this application.
-		</noscript>
+		<div id="application">
+			<div class="firstRender">
+				<div><img src="./d20Icon_192x192.png"></div>
+				<div>DDO Planner</div>
+
+				<p>
+					<noscript>Please enable javascript<br>to use this application</noscript>
+				</p>
+			</div>
+		</div>
 		<script src="./main.js" type="text/javascript"></script>
 	<script type="text/javascript" src="main.js"></script></body>
 </html>
