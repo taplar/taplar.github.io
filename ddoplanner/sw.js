@@ -1,4 +1,4 @@
-importScripts("precache-manifest.04c052a830b6380a631737f3b9153a30.js", "https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
+importScripts("precache-manifest.db0db1f6b452a558a41d00636cfd14ac.js", "https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -14,6 +14,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/^http[s]?:\/\/fonts.googleapis.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/^http[s]?:\/\/fonts.gstatic.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/^http[s]?:\/\/stackpath.bootstrapcdn.com\/(.*).css$/, workbox.strategies.staleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/\/(.*).json/, workbox.strategies.staleWhileRevalidate(), 'GET');
 
 var DDOPlanner = ( function () {
