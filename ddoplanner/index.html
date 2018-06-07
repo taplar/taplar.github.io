@@ -25,19 +25,30 @@
 				font-size: 24px;
 				text-align: center;
 			}
+			
+			.application { display: none; }
+
+			@media (min-width: 360px) {
+				.application { display: inherit; }
+				.application + .firstRender { display: none; }
+				.application + .firstRender .minimumWidthInvalid { display: none; }
+			}
 		</style>
 	</head>
 	<body>
-		<div id="application">
-			<div class="firstRender">
-				<div><img src="./d20Icon_192x192.png"></div>
-				<div>DDO Planner</div>
+		<div id="application"></div>
 
-				<p>
-					<noscript>Please enable javascript<br>to use this application</noscript>
-				</p>
-			</div>
+		<div class="firstRender">
+			<div><img src="./d20Icon_192x192.png"></div>
+			<div>DDO Planner</div>
+
+			<noscript>
+				<p>Please enable javascript<br>to use this application</p>
+			</noscript>
+
+			<p class="minimumWidthInvalid">Minimum display width<br>of 360px desired</p>
 		</div>
+		
 		<script src="./main.js" type="text/javascript"></script>
 	<script type="text/javascript" src="main.js"></script></body>
 </html>
