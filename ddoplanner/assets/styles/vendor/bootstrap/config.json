@@ -1,0 +1,11 @@
+{
+  "vars": {
+    "@grid-columns": "12",
+    "@grid-gutter-width": "0"
+  },
+  "css": [
+    "grid.less"
+  ],
+  "js": [],
+  "customizerUrl": "<none>"
+}
