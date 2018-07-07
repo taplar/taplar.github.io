@@ -5,70 +5,56 @@
 		<meta content="ie=edge" http-equiv="x-ua-compatible">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<meta content="#282828" name="theme-color">
+		<meta content="Dungeons and Dragons Online Character Planner" name="Description">
 		<link rel="manifest" href="./assets/jsons/manifest.json">
 		<link rel="preload" as="style" href="//fonts.googleapis.com/css?family=Open+Sans" onload="this.rel = 'stylesheet'">
 		<link rel="preload" as="style" href="./assets/styles/vendor/font-awesome/4.7.0/css/font-awesome.min.css" onload="this.rel = 'stylesheet'">
 		<link rel="preload" as="style" href="./assets/styles/vendor/bootstrap/bootstrap.css" onload="this.rel = 'stylesheet'">
 
-		<title>Taplar - DDO Planner</title>
+		<title>Taplar - D.D.O Planner</title>
 
 		<style>
-			body {
-				background-color: rgb(16, 16, 16);
-			}
-
-			noscript {
-				color: rgb(224, 0, 0);
-			}
-			
+			body { background-color: rgb(16, 16, 16); font-size: 12px; }
+			h1, h2, h3, h4, h5, h6 { font-size: 12px; margin: 0; }
+			noscript { color: rgb(224, 0, 0); }
 			.application { display: none; }
-
-			.firstRender {
-				color: rgb(224, 224, 224);
-				font-size: 24px;
-				text-align: center;
-			}
-
-			.firstRender.initializing .initializing { display: inherit; }
-			.firstRender.initializingFailure .initializingFailure { display: inherit; }
-			.firstRender.starting .starting { display: inherit; }
-			.firstRender.startingFailure .startingFailure { display: inherit; }
-			.firstRender .browser:not(:first-of-type) { margin-left: 12px; }
-			.firstRender .bootsequence { display: none; }
-			.firstRender .bootsequence.failure { color: rgb(224, 0, 0); }
-
-			@media (min-width: 360px) {
-				.application { display: inherit; }
-				.application + .firstRender { display: none; }
-				.firstRender .minimumWidthInvalid { display: none; }
-			}
+			.firstRender { color: rgb(224, 224, 224); font-size: 24px; text-align: center; }
+			.firstRender aside label { display: block; }
+			.firstRender footer h1 { font-size: 24px; margin-top: 20px; }
+			.firstRender footer h2 { display: inline-block; font-size: 16px; }
+			.firstRender footer h2:not(:first-of-type) { margin-left: 8px; }
+			.firstRender section .failure { color: rgb(224, 0, 0); }
+			.firstRender .bootsequence { display: none; font-size: 18px; margin: 0; }
+			.firstRender .bootsequence:first-of-type { margin-top: 20px; }
 		</style>
 	</head>
 	<body>
-		<div id="application"></div>
+		<section id="application"></section>
 
-		<div class="firstRender">
-			<div><img src="./assets/images/icons/d20Icon_192x192.png"></div>
-			<div>DDO Planner</div>
+		<section class="firstRender">
+			<aside aria-hidden="true">
+				<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo">
+				<label for="firstRenderLogo">D.D.O Planner</label>
+			</aside>
+
+			<section aria-live="polite">
+				<p class="bootsequence initializing" aria-hidden="true">Initializing Application</p>
+				<p class="bootsequence initializingFailure failure" aria-hidden="true">Unable to Initialize Application</p>
+				<p class="bootsequence starting" aria-hidden="true">Starting Application</p>
+				<p class="bootsequence startingFailure failure" aria-hidden="true">Unable to Start Application</p>
+			</section>
 
 			<noscript>
-				<p>Please enable javascript<br>to use this application</p>
+				<p>Please enable javascript to use this application</p>
 			</noscript>
 
-			<div class="bootsequence initializing">Initializing Application</div>
-			<div class="bootsequence initializingFailure failure">Unable to Initialize Application</div>
-			<div class="bootsequence starting">Starting Application</div>
-			<div class="bootsequence startingFailure failure">Unable to Start Application</div>
-
-			<p class="minimumWidthInvalid">Minimum display width<br>of 360px desired</p>
-
-			<p class="supportedBrowsers">
-				<div>Supported Browsers</div>
-				<i class="browser fa fa-chrome"> Chrome</i>
-				<i class="browser fa fa-edge"> Edge</i>
-				<i class="browser fa fa-firefox"> Firefox</i>
-			</p>
-		</div>
+			<footer>
+				<h1>Supported Browsers</h1>
+				<h2 aria-label="Google Chrome"><i class="fa fa-chrome"></i> Chrome</h2>
+				<h2 aria-label="Microsoft Edge"><i class="fa fa-edge"></i> Edge</h2>
+				<h2 aria-label="Mozilla Firefox"><i class="fa fa-firefox"></i> Firefox</h2>
+			</footer>
+		</section>
 		
 		<script src="./main.js" type="text/javascript"></script>
 	<script type="text/javascript" src="main.js"></script></body>

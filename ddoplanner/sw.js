@@ -1,4 +1,4 @@
-importScripts("precache-manifest.de17c41c6598a76065a53724c59b3d07.js", "https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
+importScripts("precache-manifest.cd3cdd766a57a5de82d0ce57c29cb817.js", "https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -10,6 +10,8 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 workbox.routing.registerRoute(/^http[s]?:\/\/fonts.googleapis.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/^http[s]?:\/\/fonts.gstatic.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 workbox.routing.registerRoute(/\/(.*).json/, workbox.strategies.staleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/\/assets\/images\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
+workbox.routing.registerRoute(/\/assets\/styles\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 
 function DBCollection ( databasePromise, collectionName ) {
 	var self = this;

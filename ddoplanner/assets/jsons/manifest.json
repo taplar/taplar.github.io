@@ -15,6 +15,6 @@
 	],
 	"name": "DDO Planner",
 	"short_name": "DDO Planner",
-	"start_url": "index.html",
+	"start_url": "../../index.html",
 	"theme_color": "#282828"
 }
