@@ -11,13 +11,14 @@
 		<link rel="preload" as="style" href="./assets/styles/vendor/font-awesome/4.7.0/css/font-awesome.min.css" onload="this.rel = 'stylesheet'">
 		<link rel="preload" as="style" href="./assets/styles/vendor/bootstrap/bootstrap.css" onload="this.rel = 'stylesheet'">
 
-		<title>Taplar - D.D.O Planner</title>
+		<title>Taplar - DDO Planner</title>
 
 		<style>
 			body { background-color: rgb(16, 16, 16); font-size: 12px; }
 			h1, h2, h3, h4, h5, h6 { font-size: 12px; margin: 0; }
 			noscript { color: rgb(224, 0, 0); }
-			.application { display: none; }
+			#application, .application:not(.started) { display: none; }
+			.application.started + .firstRender { display: none; }
 			.firstRender { color: rgb(224, 224, 224); font-size: 24px; text-align: center; }
 			.firstRender aside label { display: block; }
 			.firstRender footer h1 { font-size: 24px; margin-top: 20px; }
@@ -26,7 +27,23 @@
 			.firstRender section .failure { color: rgb(224, 0, 0); }
 			.firstRender .bootsequence { display: none; font-size: 18px; margin: 0; }
 			.firstRender .bootsequence:first-of-type { margin-top: 20px; }
+			.firstRender .startButton {
+				background-color: rgb(96, 96, 96);
+				border-color: rgb(128, 128, 128);
+				border-radius: 4px;
+				color: rgb(0, 0, 0);
+				font-size: 18px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 8px;
+			}
 		</style>
+		<script type="text/html">
+			color: rgb(0, 0, 0);
+			margin-top: 8px;
+			border-color: rgb(128, 128, 128);
+			border-radius: 4px;
+		</script>
 	</head>
 	<body>
 		<section id="application"></section>
@@ -34,14 +51,13 @@
 		<section class="firstRender">
 			<aside aria-hidden="true">
 				<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo">
-				<label for="firstRenderLogo">D.D.O Planner</label>
+				<label for="firstRenderLogo">DDO Planner</label>
 			</aside>
 
 			<section aria-live="polite">
 				<p class="bootsequence initializing" aria-hidden="true">Initializing Application</p>
 				<p class="bootsequence initializingFailure failure" aria-hidden="true">Unable to Initialize Application</p>
-				<p class="bootsequence starting" aria-hidden="true">Starting Application</p>
-				<p class="bootsequence startingFailure failure" aria-hidden="true">Unable to Start Application</p>
+				<button class="startButton" aria-hidden="true">Start Application</button>
 			</section>
 
 			<noscript>
