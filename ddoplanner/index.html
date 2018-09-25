@@ -31,13 +31,13 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.color-black { color: rgb(0, 0, 0); }
-		.color-light-black { background-color: rgb(16, 16, 16); }
-		.color-light-red { color: rgb(224, 0, 0); }
-		.color-white { color: rgb(224, 224, 224); }
+		.background-color-light-black { background-color: rgb(16, 16, 16); }
 		.display-block { display: block; }
 		.display-inline-block { display: inline-block; }
 		.display-none { display: none; }
+		.font-color-black { color: rgb(0, 0, 0); }
+		.font-color-light-red { color: rgb(224, 0, 0); }
+		.font-color-white { color: rgb(224, 224, 224); }
 		.font-size-x1 { font-size: 12px; }
 		.font-size-x1-3 { font-size: 16px; }
 		.font-size-x1-5 { font-size: 18px; }
@@ -54,16 +54,16 @@
 			border-color: rgb(128, 128, 128);
 
 		}
-
-		#firstRenderLogo { margin-top: 12px; }
 	</style>
 
 </head>
 
-<body class="color-light-black font-size-x1">
-	<section id="application" class="display-none"></section>
+<body class="background-color-light-black font-size-x1 no-margin">
+	<span aria-live="polite">
+		<section id="application" class="display-none"></section>
+	</span>
 
-	<section class="firstRender color-white font-size-x2 text-center">
+	<section class="firstRender font-color-white font-size-x2 push-down-8 text-center">
 		<aside aria-hidden="true">
 			<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo">
 			<label for="firstRenderLogo" class="display-block">DDO Planner</label>
@@ -72,17 +72,18 @@
 		<section class="font-size-x1-5" aria-live="polite">
 			<p class="bootsequence initializing display-none no-margin push-down-20" aria-hidden="true">Initializing Application</p>
 
-			<p class="bootsequence initializingFailure color-light-red display-none no-margin" aria-hidden="true">
+			<p class="bootsequence initializingFailure font-color-light-red display-none no-margin" aria-hidden="true">
 				Unable to Initialize Application
 			</p>
 
-			<button class="startButton border-radius-4 center color-black display-none font-size-x1-5 push-down-8" aria-hidden="true">
+			<button class="startButton border-radius-4 center font-color-black display-none font-size-x1-5 push-down-8" aria-hidden="true"
+					aria-label="Start Application.  Click this button to start the application.">
 				Start Application
 			</button>
 		</section>
 
 		<noscript>
-			<p class="color-light-red">Please enable javascript <span class="no-wrap">to use this application</span></p>
+			<p class="font-color-light-red">Please enable javascript <span class="no-wrap">to use this application</span></p>
 		</noscript>
 
 		<footer class="font-size-x1-3 push-down-20">
