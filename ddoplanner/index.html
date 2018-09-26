@@ -12,8 +12,18 @@
 		</title>
 
 		<link rel="manifest" href="./assets/jsons/manifest.json">
-		<link rel="preload" as="style" href="//fonts.googleapis.com/css?family=Open+Sans" onload="this.rel = 'stylesheet'">
-		<link rel="preload" as="style" href="./assets/styles/vendor/fontello/css/fontello.css" onload="this.rel = 'stylesheet'">
+
+		<script>
+			//firefox currently has link rel="preload" disabled
+			//delay loading of stylesheets until after load, until this issue is fixed
+			//Ref. https://bugzilla.mozilla.org/show_bug.cgi?id=1405761
+			window.addEventListener('load', function(){
+				document.head.innerHTML += '\
+					<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">\
+					<link rel="stylesheet" href="./assets/styles/vendor/fontello/css/fontello.css">\
+				';
+			});
+		</script>
 
 		<style>
 			body {
