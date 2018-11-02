@@ -3,12 +3,12 @@
 	"display": "standalone",
 	"icons": [
 		{
-			"src": "./assets/images/icons/d20Icon_192x192.png",
+			"src": "../images/icons/d20Icon_192x192.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "./assets/images/icons/d20Icon_512x512.png",
+			"src": "../images/icons/d20Icon_512x512.png",
 			"type": "image/png",
 			"sizes": "512x512"
 		}
